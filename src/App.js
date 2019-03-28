@@ -1,12 +1,20 @@
 import React from 'react';
-import { Message } from 'semantic-ui-react';
+import Editor from './components/Editor';
+import './App.scss';
 
-function App() {
+const initialValue = {
+  foo: 'bar',
+  bar: 'baz',
+  baz: ['one', 'two', 'three', { foo: 'bar' }]
+};
+
+export default function App(props) {
+  const [value, setValue] = React.useState(initialValue);
+
   return (
-    <div style={{ padding: '2em' }}>
-      <Message positive content="Hello World" />
+    <div className="editor-container">
+      <Editor data={value} onChange={setValue} />
+      <textarea readOnly value={JSON.stringify(value, null, 2)} />
     </div>
   );
 }
-
-export default App;
